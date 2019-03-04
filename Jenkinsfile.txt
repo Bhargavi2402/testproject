@@ -1,0 +1,22 @@
+pipeline {
+    agent any
+    stages {
+        stage('Git checkout and clean') {
+            steps {
+		deleteDir()
+                git 'https://github.com/Bhargavi2402/testproject.git'
+		bat 'mvn clean'
+            }
+        }
+        stage('Test') {
+            steps {
+                bat 'mvn test'
+            }
+        }
+        stage('Deploy') {
+            steps {
+                bat 'mvn package'
+            }
+        }
+    }
+}
