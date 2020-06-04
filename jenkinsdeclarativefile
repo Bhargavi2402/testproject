@@ -2,7 +2,7 @@ pipeline{
 agent any
 stages{
 	stage('checkout'){
-       deleteDir()
+       echo 'Checking out !!'
        git 'https://github.com/Bhargavi2402/testproject.git'
    }
 	stage('build'){
