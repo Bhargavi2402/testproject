@@ -1,0 +1,32 @@
+pipeline{
+agent any
+stages{
+	stage('checkout'){
+       deleteDir()
+       git 'https://github.com/Bhargavi2402/testproject.git'
+   }
+	stage('build'){
+		steps{
+			echo 'Building out !!'
+			script{
+				 env.PATH ="C:/Users/Reddygaris/Downloads/apache-maven/bin;c:\\Windows\\System32"
+			}
+			bat label: '', script: 'mvn package'
+		}
+	}
+
+	stage('archiving'){
+		steps{
+			echo 'archiving out !!'
+			archiveArtifacts 'target/*.jar'
+			
+		}
+	}
+	}
+	post {
+		always {
+			echo 'Pipeline finished'
+			 step([$class: 'JUnitResultArchiver', testResults: '**/target/surefire-reports/*.xml'])
+		}
+		}
+}
