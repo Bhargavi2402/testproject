@@ -1,14 +1,13 @@
-node('master'){
-stage('checkout'){
-	echo 'Checking out !!'
-}
-
-stage('build'){
-	echo 'Building!!'
-}
-
-stage('archiving'){
-	echo 'archiving !!'
-
-}
+node{
+   stage('checkout'){
+       deleteDir()
+       git 'https://github.com/Bhargavi2402/testproject.git'
+   }
+   env.PATH ="C:/Users/Reddygaris/Downloads/apache-maven/bin;c:\\Windows\\System32"
+  stage('build'){
+    bat label: '', script: 'mvn package'
+  }
+ stage('archive'){
+    archiveArtifacts 'target/*.jar'
+ }
 }
