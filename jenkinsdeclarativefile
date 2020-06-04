@@ -2,8 +2,11 @@ pipeline{
 agent any
 stages{
 	stage('checkout'){
-       echo 'Checking out !!'
-       git 'https://github.com/Bhargavi2402/testproject.git'
+		steps{
+			echo 'Checking out !!'
+			git 'https://github.com/Bhargavi2402/testproject.git'
+		}
+      
    }
 	stage('build'){
 		steps{
